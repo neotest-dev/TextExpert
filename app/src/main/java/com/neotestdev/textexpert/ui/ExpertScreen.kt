@@ -21,15 +21,15 @@ import com.neotestdev.textexpert.engine.InferenceEngine
 import com.neotestdev.textexpert.engine.expertRules
 import kotlinx.coroutines.launch
 
-
 @Preview(showBackground = true, showSystemUi = true)
 @OptIn(ExperimentalAnimationApi::class, ExperimentalMaterial3Api::class)
 @Composable
 fun ExpertScreen(modifier: Modifier = Modifier) {
 
-    var inputText by remember { mutableStateOf("") }
-    var results by remember { mutableStateOf(listOf<String>()) }
-    var showAlert by remember { mutableStateOf(false) }
+    // --- ESTADOS ---
+    var inputText by remember { mutableStateOf("") }        // Texto ingresado por el usuario
+    var results by remember { mutableStateOf(listOf<String>()) }  // Resultados del análisis
+    var showAlert by remember { mutableStateOf(false) }     // Controla alerta de texto vacío
 
     val clipboard = LocalClipboardManager.current
     val snackbarHostState = remember { SnackbarHostState() }
@@ -37,9 +37,7 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
     Scaffold(
         topBar = { },
-        snackbarHost = {
-            SnackbarHost(hostState = snackbarHostState)
-        }
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) }
     ) { innerPadding ->
 
         Column(
@@ -50,17 +48,14 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
         ) {
+
+            // --- ENCABEZADO ---
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(
-                    "Text Expert",
-                    style = MaterialTheme.typography.headlineMedium
-                )
-
+                Text("Text Expert", style = MaterialTheme.typography.headlineMedium)
                 Spacer(modifier = Modifier.height(6.dp))
-
                 Text(
                     "Tu sistema experto para analizar textos, detectar errores y darte recomendaciones.",
                     style = MaterialTheme.typography.bodyMedium,
@@ -71,17 +66,14 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
+            // --- BOTONES PEGAR / LIMPIAR ---
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
             ) {
-
-                IconButton(onClick = {
-                    clipboard.getText()?.let { inputText = it.text }
-                }) {
+                IconButton(onClick = { clipboard.getText()?.let { inputText = it.text } }) {
                     Icon(Icons.Default.ContentPaste, contentDescription = "Pegar texto")
                 }
-
                 IconButton(onClick = {
                     inputText = ""
                     results = emptyList()
@@ -90,6 +82,7 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                 }
             }
 
+            // --- CAMPO DE TEXTO ---
             TextField(
                 value = inputText,
                 onValueChange = { inputText = it },
@@ -102,13 +95,14 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
+            // --- BOTÓN ANALIZAR ---
             Button(
                 onClick = {
                     if (inputText.trim().isEmpty()) {
-                        showAlert = true
+                        showAlert = true   // Muestra alerta si no hay texto
                     } else {
-                        val engine = InferenceEngine(expertRules)
-                        results = engine.infer(inputText)
+                        val engine = InferenceEngine(expertRules) // Motor de inferencia
+                        results = engine.infer(inputText)         // Obtiene resultados del análisis
                     }
                 },
                 modifier = Modifier.fillMaxWidth()
@@ -118,7 +112,7 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-
+            // --- BOTÓN COPIAR RESULTADOS ---
             if (results.isNotEmpty()) {
                 OutlinedButton(
                     onClick = {
@@ -135,18 +129,12 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                     Spacer(modifier = Modifier.width(8.dp))
                     Text("Copiar análisis")
                 }
-
                 Spacer(modifier = Modifier.height(12.dp))
             }
 
-
-            Text(
-                text = "Resultados del análisis:",
-                style = MaterialTheme.typography.titleMedium
-            )
-
+            // --- RESULTADOS ---
+            Text(text = "Resultados del análisis:", style = MaterialTheme.typography.titleMedium)
             Spacer(modifier = Modifier.height(10.dp))
-
 
             if (results.isEmpty()) {
                 Text(
@@ -156,8 +144,7 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                 )
             }
 
-
-            /** --- RESULTADOS CON ANIMACIÓN --- */
+            // --- RESULTADOS ANIMADOS ---
             results.forEachIndexed { index, rec ->
                 AnimatedVisibility(
                     visible = true,
@@ -169,28 +156,22 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                             .padding(vertical = 4.dp),
                         elevation = CardDefaults.cardElevation(4.dp)
                     ) {
-                        Text(
-                            text = rec,
-                            modifier = Modifier.padding(16.dp)
-                        )
+                        Text(text = rec, modifier = Modifier.padding(16.dp))
                     }
                 }
             }
         }
     }
 
-    /** --- ALERTA SI NO INGRESA TEXTO --- */
+    // --- ALERTA DE TEXTO VACÍO ---
     if (showAlert) {
         AlertDialog(
             onDismissRequest = { showAlert = false },
             title = { Text("Aviso") },
             text = { Text("Debes ingresar un texto para analizar.") },
             confirmButton = {
-                TextButton(onClick = { showAlert = false }) {
-                    Text("Entendido")
-                }
+                TextButton(onClick = { showAlert = false }) { Text("Entendido") }
             }
         )
     }
 }
-

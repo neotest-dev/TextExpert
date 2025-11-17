@@ -1,5 +1,6 @@
 package com.neotestdev.textexpert.engine
 
+// Lista de reglas del sistema experto
 val expertRules = listOf(
 
     // Detecta si el texto es demasiado largo
