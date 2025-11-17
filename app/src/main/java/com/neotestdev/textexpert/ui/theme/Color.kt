@@ -1,11 +1,28 @@
 package com.neotestdev.textexpert.ui.theme
 
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-val Purple80 = Color(0xFFD0BCFF)
-val PurpleGrey80 = Color(0xFFCCC2DC)
-val Pink80 = Color(0xFFEFB8C8)
+val BluePrimary = Color(0xFF3B82F6)
+val BlueSecondary = Color(0xFF60A5FA)
+val BlueTertiary = Color(0xFF93C5FD)
 
-val Purple40 = Color(0xFF6650a4)
-val PurpleGrey40 = Color(0xFF625b71)
-val Pink40 = Color(0xFF7D5260)
+val DarkBackground = Color(0xFF0D1117)
+val DarkSurface = Color(0xFF161B22)
+
+// Light Mode
+val LightColors = lightColorScheme(
+    primary = BluePrimary,
+    secondary = BlueSecondary,
+    tertiary = BlueTertiary,
+)
+
+// Dark Mode
+val DarkColors = darkColorScheme(
+    primary = BluePrimary,
+    secondary = BlueSecondary,
+    tertiary = BlueTertiary,
+    background = DarkBackground,
+    surface = DarkSurface
+)

@@ -20,7 +20,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     modifier = Modifier.fillMaxSize()
                 ) { innerPadding ->
-                    ExpertScreen(        // ← AQUI VA TU SISTEMA EXPERTO
+                    ExpertScreen(
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
