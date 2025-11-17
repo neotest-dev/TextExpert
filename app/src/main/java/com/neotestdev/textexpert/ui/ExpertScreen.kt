@@ -36,6 +36,7 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
     val scope = rememberCoroutineScope()
 
     Scaffold(
+        topBar = { },
         snackbarHost = {
             SnackbarHost(hostState = snackbarHostState)
         }

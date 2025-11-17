@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.TextExpert" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <style name="Theme.TextExpert" parent="android:Theme.Material.NoActionBar" />
 
     <style name="Theme.TextExpert.Splash" parent="Theme.SplashScreen">
-        <item name="windowSplashScreenBackground">@color/white</item>
+        <item name="windowSplashScreenBackground">@android:color/black</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/splash_background</item>
         <item name="postSplashScreenTheme">@style/Theme.TextExpert</item>
     </style>
