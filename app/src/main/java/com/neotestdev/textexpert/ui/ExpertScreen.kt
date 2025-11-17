@@ -50,10 +50,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                 .fillMaxSize(),
             verticalArrangement = Arrangement.Top,
         ) {
-
-            /** --------------------------------------------------
-             *  TÍTULO CENTRADO + DESCRIPCIÓN
-             *  -------------------------------------------------- */
             Column(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
@@ -75,7 +71,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(24.dp))
 
-            /** --- FILA DE BOTONES PEGAR / LIMPIAR --- */
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.End
@@ -95,7 +90,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
                 }
             }
 
-            /** --- CAMPO DE TEXTO --- */
             TextField(
                 value = inputText,
                 onValueChange = { inputText = it },
@@ -108,7 +102,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
 
             Spacer(modifier = Modifier.height(16.dp))
 
-            /** --- BOTÓN ANALIZAR --- */
             Button(
                 onClick = {
                     if (inputText.trim().isEmpty()) {
@@ -126,7 +119,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(20.dp))
 
 
-            /** --- COPIAR ANÁLISIS --- */
             if (results.isNotEmpty()) {
                 OutlinedButton(
                     onClick = {
@@ -148,7 +140,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
             }
 
 
-            /** --- TÍTULO DE RESULTADOS --- */
             Text(
                 text = "Resultados del análisis:",
                 style = MaterialTheme.typography.titleMedium
@@ -157,7 +148,6 @@ fun ExpertScreen(modifier: Modifier = Modifier) {
             Spacer(modifier = Modifier.height(10.dp))
 
 
-            /** --- SI NO HAY RESULTADOS --- */
             if (results.isEmpty()) {
                 Text(
                     text = "No hay texto para analizar.",

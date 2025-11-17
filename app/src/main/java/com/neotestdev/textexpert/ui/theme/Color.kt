@@ -1,28 +1,21 @@
 package com.neotestdev.textexpert.ui.theme
 
 import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
-val BluePrimary = Color(0xFF3B82F6)
-val BlueSecondary = Color(0xFF60A5FA)
-val BlueTertiary = Color(0xFF93C5FD)
+val UnifiedColors = darkColorScheme(
+    primary = Color(0xFF1877F2),        // Azul fuerte para botones
+    onPrimary = Color(0xFFFFFFFF),      // Texto blanco en botones
 
-val DarkBackground = Color(0xFF0D1117)
-val DarkSurface = Color(0xFF161B22)
+    background = Color(0xFF000000),     // Fondo negro REAL
+    onBackground = Color(0xFFEAEAEA),   // Texto claro sobre negro
 
-// Light Mode
-val LightColors = lightColorScheme(
-    primary = BluePrimary,
-    secondary = BlueSecondary,
-    tertiary = BlueTertiary,
+    surface = Color(0xFF0D0D0D),        // Superficie casi negra
+    onSurface = Color(0xFFEAEAEA),      // Texto en cards, topbars, etc.
+
+    surfaceVariant = Color(0xFF1A1A1A), // Campos de texto, cajas
+    onSurfaceVariant = Color(0xFFEAEAEA),
+
+    outline = Color(0xFF1877F2)         // Bordes azulados si se necesitan
 )
 
-// Dark Mode
-val DarkColors = darkColorScheme(
-    primary = BluePrimary,
-    secondary = BlueSecondary,
-    tertiary = BlueTertiary,
-    background = DarkBackground,
-    surface = DarkSurface
-)
